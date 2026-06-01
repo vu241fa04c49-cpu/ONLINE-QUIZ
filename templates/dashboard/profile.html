@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Profile | QuizForge{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">{% endblock %}
+{% block content %}
+<section class="dashboard-shell"><div class="container"><div class="dashboard-layout">
+  {% include "includes/sidebar.html" %}
+  <div class="dashboard-main">
+    <div class="profile-layout">
+      <aside class="profile-card">
+        {% if avatar_url %}
+          <img class="avatar-xl avatar-image" src="{{ avatar_url }}" alt="{{ display_name }} profile photo">
+        {% else %}
+          <span class="avatar-xl">{{ initials }}</span>
+        {% endif %}
+        <h1>{{ display_name }}</h1>
+        <p class="text-muted">{{ user.email|default:"Student account" }}</p>
+        {% if profile.bio %}<p class="profile-bio">{{ profile.bio }}</p>{% endif %}
+        <div class="badges">{% for badge in badges %}<span>{{ badge }}</span>{% endfor %}</div>
+        <a class="btn btn-primary w-100 mt-3" href="{% url 'edit_profile' %}"><i class="fa-solid fa-upload" aria-hidden="true"></i> Edit profile and upload</a>
+      </aside>
+      <section class="surface-card"><h2>Profile stats</h2><div class="row g-3">{% for stat in profile_stats %}<div class="col-md-4"><div class="metric-card compact"><i class="{{ stat.icon }}"></i><span>{{ stat.label }}</span><strong>{{ stat.value }}</strong></div></div>{% endfor %}</div><hr><h2>Learning progress</h2><div class="progress-item"><span>Python</span><div class="progress"><div class="progress-bar progress-86"></div></div></div><div class="progress-item"><span>Django</span><div class="progress"><div class="progress-bar progress-72"></div></div></div><div class="progress-item"><span>Frontend</span><div class="progress"><div class="progress-bar progress-91"></div></div></div></section>
+    </div>
+  </div>
+</div></div></section>
+{% endblock %}

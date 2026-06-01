@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Quiz Result | QuizForge{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/quiz.css' %}">{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="eyebrow">Result</span><h1>Great work, {{ display_name }}.</h1><p class="lead">{{ result.message }}</p></div></section>
+<section class="section pt-4"><div class="container"><div class="result-grid">
+  <article class="surface-card score-card">
+    <canvas id="resultChart" width="220" height="220" data-score="{{ result.percent }}" aria-label="Score chart"></canvas>
+    <h2>{{ result.percent }}%</h2><p class="text-muted">Final score</p>
+    <div class="mini-stats"><span><strong>{{ result.correct }}</strong>Correct</span><span><strong>{{ result.wrong }}</strong>Wrong</span><span><strong>{{ result.time }}</strong>Time</span></div>
+  </article>
+  <aside class="surface-card"><h2>Performance analytics</h2>{% for item in performance %}<div class="analysis-row"><span>{{ item.label }}</span><strong>{{ item.value }}</strong></div>{% endfor %}<a class="btn btn-primary w-100 mt-3" href="{% url 'quiz_list' %}">Try another quiz</a></aside>
+</div></div></section>
+<section class="section pt-0"><div class="container">
+  <article class="surface-card anti-cheat-report">
+    <div>
+      <span class="eyebrow"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Anti-cheating report</span>
+      <h2>{{ anti_cheating.status }}</h2>
+      <p class="text-muted">{% if anti_cheating.exam_locked %}The exam was automatically closed after 3 suspicious activities.{% else %}This unique monitoring feature counts tab switching and window focus loss during the exam.{% endif %}</p>
+    </div>
+    <div class="anti-cheat-score">
+      <strong>{{ anti_cheating.suspicious_count }}</strong>
+      <span>Suspicious activities</span>
+    </div>
+    <div class="anti-cheat-events">
+      <h3>Detected activity</h3>
+      <ul>
+        {% for event in anti_cheating.events %}
+          <li>{{ event }}</li>
+        {% empty %}
+          <li>No tab switching or focus-loss events were detected.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </article>
+</div></section>
+{% endblock %}
+{% block extra_js %}<script src="{% static 'js/quiz.js' %}"></script>{% endblock %}

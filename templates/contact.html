@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Contact | QuizForge{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="eyebrow">Contact</span><h1>Talk to the QuizForge team.</h1><p class="lead">Send questions about quiz setup, user support, or frontend integration.</p></div></section>
+<section class="section"><div class="container"><div class="contact-grid">
+  <form class="surface-card needs-validation" data-validate-form novalidate>
+    <div class="row g-3">
+      <div class="col-md-6"><label class="form-label" for="name">Name</label><input class="form-control" id="name" required></div>
+      <div class="col-md-6"><label class="form-label" for="email">Email</label><input class="form-control" id="email" type="email" required></div>
+      <div class="col-12"><label class="form-label" for="subject">Subject</label><input class="form-control" id="subject" required></div>
+      <div class="col-12"><label class="form-label" for="message">Message</label><textarea class="form-control" id="message" rows="6" required></textarea></div>
+    </div>
+    <button class="btn btn-primary mt-3" type="submit">Send message <i class="fa-regular fa-paper-plane"></i></button>
+  </form>
+  <aside class="surface-card"><h2>Contact info</h2><p><i class="fa-regular fa-envelope me-2"></i>support@quizforge.local</p><p><i class="fa-solid fa-phone me-2"></i>+91 90000 00000</p><p><i class="fa-solid fa-location-dot me-2"></i>Remote-first learning team</p></aside>
+</div></div></section>
+{% endblock %}

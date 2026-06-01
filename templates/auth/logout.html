@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Logout | QuizForge{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/auth.css' %}">{% endblock %}
+{% block content %}
+<section class="auth-section auth-compact">
+  <div class="container">
+    <form method="post" class="auth-panel text-center">
+      {% csrf_token %}
+      <span class="auth-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></span>
+      <h1>Log out?</h1>
+      <p class="text-muted">You can sign back in anytime to continue your quizzes.</p>
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit">Yes, log me out</button>
+        <a class="btn btn-outline-primary" href="{% url 'student_dashboard' %}">Stay signed in</a>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

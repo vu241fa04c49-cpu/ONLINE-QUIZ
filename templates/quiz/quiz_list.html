@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Quizzes | QuizForge{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/quiz.css' %}">{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="eyebrow">Quiz library</span><h1>Choose your next challenge.</h1><p class="lead">Search by topic, difficulty, or title and start a focused assessment.</p></div></section>
+<section class="section pt-4"><div class="container">
+  <div class="toolbar">
+    <div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input class="form-control" data-quiz-search placeholder="Search quizzes" aria-label="Search quizzes"></div>
+    <select class="form-select" data-quiz-filter aria-label="Filter quizzes"><option value="all">All categories</option><option value="python">Python</option><option value="django">Django</option><option value="frontend">Frontend</option></select>
+  </div>
+  <div class="row g-4">
+    {% for quiz in quizzes %}
+    <div class="col-md-6 col-xl-4 quiz-item" data-category="{% cycle 'python' 'django' 'frontend' %}">
+      <article class="quiz-card">
+        <div class="card-icon"><i class="fa-solid fa-clipboard-question"></i></div>
+        <span class="badge text-bg-primary">15 min</span>
+        <h2>{{ quiz.title }}</h2>
+        <p>Practice core concepts with timed multiple-choice questions and immediate results.</p>
+        <div class="quiz-meta"><span><i class="fa-regular fa-circle-question"></i> 10 questions</span><span><i class="fa-solid fa-signal"></i> Mixed</span></div>
+        <a class="btn btn-primary w-100" href="{% url 'quiz_detail' quiz.pk %}">View details</a>
+      </article>
+    </div>
+    {% empty %}
+    <div class="col-12">{% include "quiz/empty_state.html" %}</div>
+    {% endfor %}
+  </div>
+  <nav class="pagination-wrap" aria-label="Quiz pagination"><ul class="pagination justify-content-center"><li class="page-item disabled"><span class="page-link">Previous</span></li><li class="page-item active"><span class="page-link">1</span></li><li class="page-item"><a class="page-link" href="{% url 'quiz_list' %}">2</a></li><li class="page-item"><a class="page-link" href="{% url 'quiz_list' %}">Next</a></li></ul></nav>
+</div></section>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Server Error | QuizForge{% endblock %}
+{% block content %}
+<section class="error-section">
+  <div class="container">
+    <div class="error-card">
+      <span class="error-code">500</span>
+      <h1>Something went wrong</h1>
+      <p>The server could not complete the request. Please try again shortly.</p>
+      <a class="btn btn-primary" href="{% url 'home' %}">Go home</a>
+      <a class="btn btn-outline-primary" href="{% url 'contact' %}">Contact support</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

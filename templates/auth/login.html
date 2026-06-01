@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Login | QuizForge{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/auth.css' %}">{% endblock %}
+{% block content %}
+<section class="auth-section">
+  <div class="container">
+    <div class="auth-card">
+      <div class="auth-visual">
+        <span class="eyebrow"><i class="fa-solid fa-shield-halved"></i> Secure access</span>
+        <h1>Welcome back to your quiz workspace.</h1>
+        <p>Resume assessments, view results, and keep your progress moving from one clean dashboard.</p>
+        <div class="auth-points">
+          <span><i class="fa-solid fa-check"></i> Timed attempts</span>
+          <span><i class="fa-solid fa-check"></i> Instant analytics</span>
+          <span><i class="fa-solid fa-check"></i> Personal leaderboard rank</span>
+        </div>
+      </div>
+      <form method="post" class="auth-form needs-validation" data-validate-form novalidate>
+        {% csrf_token %}
+        <h2>Login</h2>
+        <p class="text-muted">Use your username or email address.</p>
+        {% if form.non_field_errors %}<div class="form-error">{{ form.non_field_errors }}</div>{% endif %}
+        <div class="form-floating icon-field">
+          <input class="form-control" id="id_username" name="username" type="text" placeholder="Username or email" value="{{ form.username.value|default:'' }}" autocomplete="username" required>
+          <label for="id_username">Username or email</label>
+          <i class="fa-regular fa-user"></i>
+          {% if form.username.errors %}<div class="invalid-text">{{ form.username.errors|striptags }}</div>{% endif %}
+        </div>
+        <div class="form-floating icon-field password-field">
+          <input class="form-control" id="id_password" name="password" type="password" placeholder="Password" autocomplete="current-password" required>
+          <label for="id_password">Password</label>
+          <i class="fa-solid fa-lock"></i>
+          <button type="button" data-password-toggle aria-label="Show password"><i class="fa-regular fa-eye"></i></button>
+          {% if form.password.errors %}<div class="invalid-text">{{ form.password.errors|striptags }}</div>{% endif %}
+        </div>
+        <div class="form-row">
+          <div class="form-check">
+            <input class="form-check-input" id="id_remember_me" name="remember_me" type="checkbox">
+            <label class="form-check-label" for="id_remember_me">Remember me</label>
+          </div>
+          <a href="{% url 'forgot_password' %}">Forgot password? Get a 5-digit OTP</a>
+        </div>
+        <button class="btn btn-primary w-100" type="submit" data-loading-button><span>Login</span><i class="fa-solid fa-arrow-right"></i></button>
+        <div class="otp-reset-callout" role="note" aria-label="Password reset with OTP">
+          <i class="fa-solid fa-key" aria-hidden="true"></i>
+          <div>
+            <strong>Cannot access your account?</strong>
+            <a href="{% url 'forgot_password' %}">Get OTP and change password</a>
+          </div>
+        </div>
+        <p class="auth-switch">New here? <a href="{% url 'register' %}">Create an account</a></p>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

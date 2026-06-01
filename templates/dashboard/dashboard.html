@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Dashboard | QuizForge{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">{% endblock %}
+{% block content %}
+<section class="dashboard-shell"><div class="container"><div class="dashboard-layout">
+  {% include "includes/sidebar.html" %}
+  <div class="dashboard-main">
+    <div class="dashboard-hero"><div><span class="eyebrow">Dashboard</span><h1>Welcome, {{ display_name }}.</h1><p>Track quiz activity, performance, and next recommended challenges.</p></div><span class="avatar-xl">{{ initials }}</span></div>
+    <div class="row g-4">
+      {% for metric in metrics %}<div class="col-md-4"><article class="metric-card"><i class="{{ metric.icon }}"></i><span>{{ metric.label }}</span><strong>{{ metric.value }}</strong></article></div>{% endfor %}
+    </div>
+    <div class="row g-4 mt-1">
+      <div class="col-xl-8"><section class="surface-card"><h2>Performance trend</h2><div class="bar-chart">{% for bar in score_bars %}<span class="bar-{{ bar }}"></span>{% endfor %}</div></section></div>
+      <div class="col-xl-4"><section class="surface-card"><h2>Recommended quizzes</h2>{% for quiz in quizzes %}<div class="list-row"><span>{{ quiz.title }}</span><small>{{ quiz.meta }}</small></div>{% endfor %}</section></div>
+      <div class="col-12"><section class="surface-card table-responsive"><h2>Recent activity</h2><table class="table align-middle"><thead><tr><th>Quiz</th><th>Date</th><th>Score</th><th>Status</th></tr></thead><tbody>{% for item in history %}<tr><td>{{ item.quiz }}</td><td>{{ item.date }}</td><td>{{ item.score }}</td><td><span class="badge text-bg-{{ item.status_class }}">{{ item.status }}</span></td></tr>{% endfor %}</tbody></table></section></div>
+    </div>
+  </div>
+</div></div></section>
+{% endblock %}

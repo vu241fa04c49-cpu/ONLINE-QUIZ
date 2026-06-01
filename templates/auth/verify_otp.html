@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Verify OTP | QuizForge{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/auth.css' %}">{% endblock %}
+{% block content %}
+<section class="auth-section auth-compact">
+  <div class="container">
+    <form method="post" class="auth-panel needs-validation" data-validate-form data-api-form="verify-otp" data-api-url="{% url 'api_verify_otp' %}" data-next-url="{% url 'reset_password' %}" novalidate>
+      {% csrf_token %}
+      <span class="auth-icon"><i class="fa-solid fa-shield-halved"></i></span>
+      <h1>Enter verification code</h1>
+      <p class="text-muted">Use the 5-digit OTP sent to your email.</p>
+      <div class="form-floating otp-field" data-otp-group>
+        <input class="form-control text-center" id="id_otp" name="otp" inputmode="numeric" maxlength="5" pattern="[0-9]{5}" placeholder="00000" required>
+        <label for="id_otp">Verification code</label>
+        {% if form.otp.errors %}<div class="invalid-text">{{ form.otp.errors|striptags }}</div>{% endif %}
+      </div>
+      <button class="btn btn-primary w-100" type="submit" data-loading-button><span>Verify code</span><i class="fa-solid fa-arrow-right"></i></button>
+    </form>
+  </div>
+</section>
+{% endblock %}

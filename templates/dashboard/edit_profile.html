@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Edit Profile | QuizForge{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">{% endblock %}
+{% block content %}
+<section class="dashboard-shell"><div class="container"><div class="dashboard-layout">
+  {% include "includes/sidebar.html" %}
+  <div class="dashboard-main">
+    <form method="post" enctype="multipart/form-data" class="surface-card needs-validation" data-validate-form novalidate>
+      {% csrf_token %}
+      <div class="d-flex align-items-center gap-3 mb-4">
+        {% if avatar_url %}
+          <img class="avatar-lg avatar-image" src="{{ avatar_url }}" alt="{{ display_name }} profile photo">
+        {% else %}
+          <span class="avatar-lg">{{ initials }}</span>
+        {% endif %}
+        <div><span class="eyebrow">Profile</span><h1>Edit your details</h1></div>
+      </div>
+      {% if form.non_field_errors %}<div class="form-error">{{ form.non_field_errors }}</div>{% endif %}
+      <div class="row g-3">
+        <div class="col-md-6"><label class="form-label" for="first_name">First name</label><input class="form-control" id="first_name" name="first_name" value="{{ form.first_name.value|default:'' }}">{% if form.first_name.errors %}<div class="invalid-text">{{ form.first_name.errors|striptags }}</div>{% endif %}</div>
+        <div class="col-md-6"><label class="form-label" for="last_name">Last name</label><input class="form-control" id="last_name" name="last_name" value="{{ form.last_name.value|default:'' }}">{% if form.last_name.errors %}<div class="invalid-text">{{ form.last_name.errors|striptags }}</div>{% endif %}</div>
+        <div class="col-md-6"><label class="form-label" for="username">Username</label><input class="form-control" id="username" name="username" value="{{ form.username.value|default:'' }}" autocomplete="username" required>{% if form.username.errors %}<div class="invalid-text">{{ form.username.errors|striptags }}</div>{% endif %}</div>
+        <div class="col-md-6"><label class="form-label" for="email">Email</label><input class="form-control" id="email" name="email" type="email" value="{{ form.email.value|default:'' }}" autocomplete="email" required>{% if form.email.errors %}<div class="invalid-text">{{ form.email.errors|striptags }}</div>{% endif %}</div>
+        <div class="col-12"><label class="form-label" for="bio">Bio</label><textarea class="form-control" id="bio" name="bio" rows="4" placeholder="Tell us what you are learning.">{{ form.bio.value|default:'' }}</textarea>{% if form.bio.errors %}<div class="invalid-text">{{ form.bio.errors|striptags }}</div>{% endif %}</div>
+        <div class="col-12">
+          <label class="form-label" for="avatar">Profile photo upload</label>
+          <div class="file-upload-box">
+            <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
+            <div>
+              <strong>Upload JPG, PNG, or WebP</strong>
+              <span>Maximum file size: 2 MB.</span>
+            </div>
+            <input class="form-control" id="avatar" name="avatar" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" data-file-preview>
+          </div>
+          {% if form.avatar.errors %}<div class="invalid-text">{{ form.avatar.errors|striptags }}</div>{% endif %}
+        </div>
+      </div>
+      <button class="btn btn-primary mt-4" type="submit" data-loading-button><i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save changes</button>
+      <a class="btn btn-outline-primary mt-4" href="{% url 'profile' %}">Cancel</a>
+    </form>
+  </div>
+</div></div></section>
+{% endblock %}

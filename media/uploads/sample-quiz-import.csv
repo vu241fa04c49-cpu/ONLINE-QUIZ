@@ -1,0 +1,4 @@
+title,category,difficulty,questions,duration_minutes
+Python Fundamentals,Python,Beginner,10,15
+Django Views and URLs,Django,Intermediate,12,20
+Bootstrap Responsive UI,Frontend,Intermediate,15,18

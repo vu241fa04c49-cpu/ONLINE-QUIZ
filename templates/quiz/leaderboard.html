@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Leaderboard | QuizForge{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="eyebrow">Leaderboard</span><h1>Top performers this week.</h1><p class="lead">Celebrate consistency, speed, and accuracy across published quizzes.</p></div></section>
+<section class="section pt-4"><div class="container">
+  <div class="podium">{% for row in leaderboard|slice:":3" %}<article class="podium-card {% if forloop.first %}winner{% endif %}"><span class="avatar-lg">{{ row.initials }}</span><h2>{{ row.name }}</h2><strong>{{ row.score }}</strong><small>{{ row.badge }}</small></article>{% endfor %}</div>
+  <div class="surface-card table-responsive"><table class="table align-middle"><thead><tr><th>Rank</th><th>Student</th><th>Quiz</th><th>Score</th><th>Badge</th></tr></thead><tbody>{% for row in leaderboard %}<tr><td>#{{ forloop.counter }}</td><td><span class="avatar-mini me-2">{{ row.initials }}</span>{{ row.name }}</td><td>{{ row.quiz }}</td><td><strong>{{ row.score }}</strong></td><td><span class="badge text-bg-{{ row.badge_class }}">{{ row.badge }}</span></td></tr>{% endfor %}</tbody></table></div>
+</div></section>
+{% endblock %}

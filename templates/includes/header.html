@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg fixed-top app-navbar">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'home' %}"><span class="brand-mark"><i class="fa-solid fa-bolt"></i></span><span>QuizForge</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'quiz_list' %}">Quizzes</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'leaderboard' %}">Leaderboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+      <div class="d-flex align-items-lg-center gap-2 flex-column flex-lg-row">
+        {% if request.user.is_authenticated %}
+          <div class="dropdown">
+            <button class="btn btn-soft dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user"></i> {{ request.user.username }}</button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fa-regular fa-id-card me-2"></i>Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><form action="{% url 'logout' %}" method="post">{% csrf_token %}<button class="dropdown-item" type="submit"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Logout</button></form></li>
+            </ul>
+          </div>
+        {% else %}
+          <a class="btn btn-ghost" href="{% url 'login' %}">Login</a>
+          <a class="btn btn-gradient" href="{% url 'register' %}">Signup</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>

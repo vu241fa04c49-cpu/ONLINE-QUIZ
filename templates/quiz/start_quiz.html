@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Start Quiz | QuizForge{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/quiz.css' %}">{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="eyebrow">Ready</span><h1>Start {{ quiz.title }}</h1><p class="lead">Once you begin, keep the browser open until the quiz is submitted.</p></div></section>
+<section class="section pt-4"><div class="container"><div class="surface-card text-center mx-auto narrow-card">
+  <span class="auth-icon"><i class="fa-solid fa-play"></i></span>
+  <h2>Before you begin</h2>
+  <p class="text-muted">Find a quiet moment, check your connection, and submit before the timer ends.</p>
+  <div class="mini-stats"><span><strong>10</strong>Questions</span><span><strong>15</strong>Minutes</span><span><strong>100</strong>Points</span></div>
+  <a class="btn btn-primary btn-lg mt-4" href="{% url 'quiz_question' quiz.pk %}">Begin attempt</a>
+</div></div></section>
+{% endblock %}

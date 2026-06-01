@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Quiz Attempt | QuizForge{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/quiz.css' %}">{% endblock %}
+{% block content %}
+<section class="quiz-attempt-section"><div class="container">
+  <div class="attempt-header surface-card">
+    <div><span class="eyebrow">Live attempt</span><h1>{{ quiz.title }}</h1></div>
+    <span class="timer-pill" data-timer><i class="fa-regular fa-clock"></i> 15:00</span>
+  </div>
+  <div class="anti-cheat-banner" data-anti-cheat data-quiz-id="{{ quiz.id }}" role="status" aria-live="polite">
+    <div>
+      <strong><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Anti-cheating monitor active</strong>
+      <span>Tab switches and window focus loss are recorded in the final report.</span>
+    </div>
+    <span class="anti-cheat-count"><span data-suspicious-count>0</span> alerts</span>
+  </div>
+  <div class="attempt-grid" data-quiz-attempt data-duration="900">
+    <article class="question-card">
+      <div class="d-flex justify-content-between align-items-center"><strong>Question <span data-current-question>1</span> of 5</strong><button class="btn btn-outline-primary btn-sm" type="button" data-flag-question><i class="fa-regular fa-flag"></i> Flag</button></div>
+      <div class="progress my-3"><div class="progress-bar progress-20" data-quiz-progress></div></div>
+      <h2 data-question-text>Which Python data type is immutable?</h2>
+      <div data-question-panel>
+        <label class="quiz-option"><input class="form-check-input me-2" type="radio" name="answer"> Tuple</label>
+        <label class="quiz-option"><input class="form-check-input me-2" type="radio" name="answer"> List</label>
+        <label class="quiz-option"><input class="form-check-input me-2" type="radio" name="answer"> Dictionary</label>
+        <label class="quiz-option"><input class="form-check-input me-2" type="radio" name="answer"> Set</label>
+      </div>
+      <div class="attempt-actions"><button class="btn btn-outline-primary" type="button" data-prev-question><i class="fa-solid fa-arrow-left"></i> Previous</button><button class="btn btn-primary" type="button" data-next-question>Next <i class="fa-solid fa-arrow-right"></i></button><a class="btn btn-success" href="{% url 'result' %}" data-submit-quiz>Submit quiz</a></div>
+    </article>
+    <aside class="surface-card"><h2>Question map</h2><div class="question-palette" data-question-palette>{% for n in "12345" %}<button type="button">{{ forloop.counter }}</button>{% endfor %}</div><div class="anti-cheat-log mt-4"><h3>Activity monitor</h3><p class="text-muted mb-2">Suspicious events appear here during the exam.</p><ul data-suspicious-events><li>No suspicious activity detected.</li></ul></div></aside>
+  </div>
+</div></section>
+{% endblock %}
+{% block extra_js %}<script src="{% static 'js/quiz.js' %}"></script>{% endblock %}

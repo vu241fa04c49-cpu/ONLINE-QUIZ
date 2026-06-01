@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Create Account | QuizForge{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/auth.css' %}">{% endblock %}
+{% block content %}
+<section class="auth-section">
+  <div class="container">
+    <div class="auth-card auth-card-wide">
+      <div class="auth-visual">
+        <span class="eyebrow"><i class="fa-solid fa-user-plus"></i> Start learning</span>
+        <h1>Create your QuizForge account.</h1>
+        <p>Join a focused, responsive quiz environment designed for learning momentum.</p>
+        <div class="mini-metric-grid">
+          <strong>40k+<span>Attempts</span></strong>
+          <strong>96%<span>Satisfaction</span></strong>
+        </div>
+      </div>
+      <form method="post" class="auth-form needs-validation" data-validate-form novalidate>
+        {% csrf_token %}
+        <h2>Sign up</h2>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-floating icon-field">
+              <input class="form-control" id="id_full_name" name="full_name" placeholder="Full name" value="{{ form.full_name.value|default:'' }}" required>
+              <label for="id_full_name">Full name</label><i class="fa-regular fa-id-card"></i>
+              {% if form.full_name.errors %}<div class="invalid-text">{{ form.full_name.errors|striptags }}</div>{% endif %}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating icon-field">
+              <input class="form-control" id="id_username" name="username" placeholder="Username" value="{{ form.username.value|default:'' }}" autocomplete="username" required>
+              <label for="id_username">Username</label><i class="fa-regular fa-user"></i>
+              {% if form.username.errors %}<div class="invalid-text">{{ form.username.errors|striptags }}</div>{% endif %}
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-floating icon-field">
+              <input class="form-control" id="id_email" name="email" type="email" placeholder="Email" value="{{ form.email.value|default:'' }}" autocomplete="email" required>
+              <label for="id_email">Email address</label><i class="fa-regular fa-envelope"></i>
+              {% if form.email.errors %}<div class="invalid-text">{{ form.email.errors|striptags }}</div>{% endif %}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating icon-field password-field">
+              <input class="form-control" id="id_password" name="password" type="password" placeholder="Password" autocomplete="new-password" data-strength-input required>
+              <label for="id_password">Password</label><i class="fa-solid fa-lock"></i>
+              <button type="button" data-password-toggle aria-label="Show password"><i class="fa-regular fa-eye"></i></button>
+              {% if form.password.errors %}<div class="invalid-text">{{ form.password.errors|striptags }}</div>{% endif %}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating icon-field password-field">
+              <input class="form-control" id="id_password2" name="password2" type="password" placeholder="Confirm password" autocomplete="new-password" required>
+              <label for="id_password2">Confirm password</label><i class="fa-solid fa-lock"></i>
+              <button type="button" data-password-toggle aria-label="Show password"><i class="fa-regular fa-eye"></i></button>
+              {% if form.password2.errors %}<div class="invalid-text">{{ form.password2.errors|striptags }}</div>{% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="strength" aria-hidden="true"><span></span></div>
+        <div class="form-check my-3">
+          <input class="form-check-input" id="id_terms" name="terms" type="checkbox" required>
+          <label class="form-check-label" for="id_terms">I agree to the terms and privacy policy.</label>
+          {% if form.terms.errors %}<div class="invalid-text">{{ form.terms.errors|striptags }}</div>{% endif %}
+        </div>
+        <button class="btn btn-primary w-100" type="submit" data-loading-button><span>Create account</span><i class="fa-solid fa-arrow-right"></i></button>
+        <p class="auth-switch">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

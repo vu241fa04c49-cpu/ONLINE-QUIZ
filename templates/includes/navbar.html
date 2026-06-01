@@ -1,0 +1,45 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg app-navbar fixed-top" aria-label="Primary navigation">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'home' %}" aria-label="QuizForge home">
+      <span class="brand-mark"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span>
+      <span>QuizForge</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'quiz_list' or request.resolver_match.url_name == 'quiz' %}active{% endif %}" href="{% url 'quiz_list' %}">Quizzes</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'leaderboard' %}active{% endif %}" href="{% url 'leaderboard' %}">Leaderboard</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">About</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'api_docs' %}active{% endif %}" href="{% url 'api_docs' %}">API</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+      <div class="d-flex align-items-lg-center gap-2 flex-column flex-lg-row">
+        {% if user.is_authenticated %}
+          <a class="btn btn-icon-soft" href="{% url 'student_dashboard' %}" aria-label="Open dashboard"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></a>
+          <div class="dropdown">
+            <button class="btn btn-user dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="avatar-mini">{{ user.first_name|default:user.username|slice:":1"|upper }}</span>
+              <span class="d-lg-inline">{{ user.get_full_name|default:user.username }}</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="{% url 'student_dashboard' %}"><i class="fa-solid fa-gauge-high me-2"></i>Dashboard</a></li>
+              <li><a class="dropdown-item" href="{% url 'quiz_list' %}"><i class="fa-solid fa-list-check me-2"></i>My Quizzes</a></li>
+              <li><a class="dropdown-item" href="{% url 'result' %}"><i class="fa-solid fa-chart-pie me-2"></i>Results</a></li>
+              <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fa-regular fa-user me-2"></i>Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'edit_profile' %}"><i class="fa-solid fa-user-gear me-2"></i>Profile Settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Logout</a></li>
+            </ul>
+          </div>
+        {% else %}
+          <a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a>
+          <a class="btn btn-primary" href="{% url 'register' %}">Sign up</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Admin Dashboard | QuizForge{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">{% endblock %}
+{% block content %}
+<section class="dashboard-shell"><div class="container">
+  <div class="dashboard-hero"><div><span class="eyebrow">Admin</span><h1>Quiz operations</h1><p>Monitor quizzes, learners, attempts, and average performance.</p></div></div>
+  <div class="row g-4">{% for card in admin_cards %}<div class="col-md-6 col-xl-3"><article class="metric-card"><i class="{{ card.icon }}"></i><span>{{ card.label }}</span><strong>{{ card.value }}</strong></article></div>{% endfor %}</div>
+</div></section>
+{% endblock %}

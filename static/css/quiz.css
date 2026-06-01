@@ -1,0 +1,46 @@
+.quiz-meta, .meta-list { display: grid; gap: .55rem; margin: 1rem 0; color: var(--muted); font-weight: 800; }
+.sample-question { margin-top: 1.5rem; padding: 1rem; border-radius: 16px; background: #f8fafc; border: 1px solid var(--line); }
+.sample-question span { display: inline-block; margin: .35rem .35rem 0 0; padding: .45rem .7rem; border-radius: 999px; background: #fff; border: 1px solid var(--line); font-weight: 800; }
+.narrow-card { max-width: 720px; }
+.mini-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; }
+.mini-stats span { padding: 1rem; border: 1px solid var(--line); border-radius: 16px; background: #fff; color: var(--muted); font-weight: 800; }
+.mini-stats strong { display: block; color: var(--text); font-size: 1.6rem; }
+.quiz-attempt-section { padding: 38px 0 78px; }
+.attempt-header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
+.attempt-header h1 { font-weight: 900; margin: .35rem 0 0; }
+.anti-cheat-banner { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.2rem; padding: 1rem 1.25rem; border: 1px solid rgba(245,158,11,.35); border-radius: var(--radius); background: #fffbeb; color: #78350f; box-shadow: var(--shadow); }
+.anti-cheat-banner.anti-cheat-warning { animation: antiCheatPulse .9s ease; }
+.anti-cheat-banner strong, .anti-cheat-banner span { display: block; }
+.anti-cheat-count { flex: none; padding: .65rem .9rem; border-radius: 999px; background: #fff; border: 1px solid rgba(245,158,11,.35); font-weight: 900; }
+.anti-cheat-log h3, .anti-cheat-events h3 { font-size: 1rem; font-weight: 900; }
+.anti-cheat-log ul, .anti-cheat-events ul { margin: 0; padding-left: 1.1rem; color: var(--muted); font-weight: 800; }
+.anti-cheat-log li, .anti-cheat-events li { margin: .45rem 0; }
+.anti-cheat-report { display: grid; grid-template-columns: minmax(0, 1.3fr) 220px minmax(0, 1fr); gap: 1.25rem; align-items: center; }
+.anti-cheat-score { padding: 1rem; border: 1px solid var(--line); border-radius: 18px; text-align: center; background: #fffbeb; color: #78350f; }
+.anti-cheat-score strong { display: block; font-size: 3rem; line-height: 1; }
+.anti-cheat-score span { font-weight: 900; }
+.anti-cheat-modal { border: 2px solid rgba(245,158,11,.45); border-radius: 18px; }
+.anti-cheat-modal .modal-header { background: #fffbeb; color: #78350f; border-bottom: 1px solid rgba(245,158,11,.35); }
+@keyframes antiCheatPulse { 0%, 100% { transform: translateY(0); } 35% { transform: translateY(-2px); box-shadow: 0 22px 52px rgba(245,158,11,.2); } }
+.question-card { padding: 1.5rem; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; box-shadow: var(--shadow); }
+.question-card h2 { margin: 1.25rem 0; font-weight: 900; }
+.quiz-option { cursor: pointer; margin-bottom: .75rem; }
+.attempt-actions { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: space-between; margin-top: 1.3rem; }
+.question-palette { display: grid; grid-template-columns: repeat(5, 1fr); gap: .55rem; }
+.question-palette button { height: 44px; border: 1px solid var(--line); border-radius: 14px; background: #fff; color: var(--text); font-weight: 900; }
+.question-palette button.active { color: #fff; border-color: var(--primary); background: var(--primary); }
+.question-palette button.flagged { outline: 3px solid rgba(245,158,11,.35); border-color: #f59e0b; }
+.score-card { text-align: center; }
+.score-card canvas { max-width: 220px; margin: auto; }
+.score-card h2 { font-size: 3rem; }
+.analysis-row { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+.analysis-row:last-child { border-bottom: 0; }
+.podium { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; align-items: end; margin-bottom: 1.5rem; }
+.podium-card { text-align: center; }
+.podium-card.winner { padding-top: 2.5rem; }
+.podium-card h2 { margin-top: .75rem; font-size: 1.15rem; font-weight: 900; }
+.podium-card strong { display: block; font-size: 2rem; color: var(--primary); }
+.empty-state { text-align: center; padding: 3rem 1.5rem; }
+.empty-state i { font-size: 3rem; color: var(--primary); }
+.pagination-wrap { margin-top: 2rem; }
+@media (max-width: 767.98px) { .podium, .mini-stats, .anti-cheat-report { grid-template-columns: 1fr; } .attempt-header, .anti-cheat-banner { display: block; } .anti-cheat-count { margin-top: .75rem; } .attempt-actions .btn { width: 100%; } }
