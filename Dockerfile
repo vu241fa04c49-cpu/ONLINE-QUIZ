@@ -1,7 +1,15 @@
-FROM python:3.14.5
+FROM node:18
+
 WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
 COPY . .
-RUN pip install -r requirements.txt
-RUN python manage.py collectstatic --noinput
-EXPOSE 10000
-CMD ["gunicorn","onlinequiz.wsgi:application","--bind","0.0.0.0:10000"]
+
+RUN npm run build
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
